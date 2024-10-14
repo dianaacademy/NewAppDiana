@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "DianaLearningPortal",
-    "slug": "DianaLearningPortal",
+    "name": "diana",
+    "slug": "diana",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
