@@ -150,7 +150,7 @@ import {
       marginVertical: 10,
     },
     loginButtonWrapper: {
-      backgroundColor: Colors.primary,
+      backgroundColor: Colors.PRIMARY,
       borderRadius: 100,
       marginTop: 20,
     },

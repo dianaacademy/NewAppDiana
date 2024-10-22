@@ -10,7 +10,6 @@ export default function LoginScreen() {
 
 
   const handleLogin = () => {
-    
     navigation.navigate("LoginSS");
   };
 
