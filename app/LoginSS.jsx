@@ -129,6 +129,9 @@ const LoginScreenSS = () => {
   const handleForgot = () => {
     navigation.navigate("Forgotpass");
   };
+  const handleMob = () => {
+    navigation.navigate("OTPLogin");
+  };
 
   
   return (
@@ -188,7 +191,7 @@ const LoginScreenSS = () => {
         </TouchableOpacity>
 
         <Text style={styles.continueText}>or</Text>
-        <TouchableOpacity style={styles.googleButtonContainer}>
+        <TouchableOpacity style={styles.googleButtonContainer} onPress={handleMob}>
           <SimpleLineIcons name={"screen-smartphone"} size={30} color={Colors.secondary} />
           <Text style={styles.googleText}>Login with OTP</Text>
         </TouchableOpacity>

@@ -1,40 +1,64 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { AuthProvider } from './Context/AuthContext';
-import LoginScreenSS from './LoginSS'; 
+import { AuthProvider, useAuth } from './Context/AuthContext';
+import LoginScreenSS from './LoginSS';
 import HomeScreen from './(tabs)/home';
 import SignupSS from './SignupSS';
 import Forgotpass from './Forgotpass';
+import Moblogin from './OTPLogin';
+import OTPLogin from './OTPLogin';
+import OTPVerification from './OTPVerification';
 
 const Stack = createStackNavigator();
 
-const App = () => {
-  return (
-    <AuthProvider>
-      <NavigationContainer independent={true}>
-        <AppNavigator />
-      </NavigationContainer>
-    </AuthProvider>
-  );
-};
-
-const AppNavigator = () => {
+// Navigation container for authenticated screens
+const MainStack = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Auth" component={AuthStack} />
-      <Stack.Screen name="Home" component={HomeScreen} />
-      
+      <Stack.Screen name="HomeScreen" component={HomeScreen} />
+      {/* Add other authenticated screens here */}
     </Stack.Navigator>
   );
 };
 
-const AuthStack = () => (
-  <Stack.Navigator screenOptions={{ headerShown: false }}>
-    <Stack.Screen name="LoginSS" component={LoginScreenSS} /> 
-    <Stack.Screen name="SignupSS" component={SignupSS} />
-    <Stack.Screen name="Forgotpass" component={Forgotpass} />
-  </Stack.Navigator>
-);
+// Navigation container for authentication screens
+const AuthStack = () => {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="LoginSS" component={LoginScreenSS} />
+      <Stack.Screen name="SignupSS" component={SignupSS} />
+      <Stack.Screen name="Forgotpass" component={Forgotpass} />
+      <Stack.Screen name="OTPLogin" component={OTPLogin} />
+      <Stack.Screen name="OTPVerification" component={OTPVerification} />
+    </Stack.Navigator>
+  );
+};
+
+// Root navigator that checks auth state
+const RootNavigator = () => {
+  const { userData } = useAuth();
+
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      {userData ? (
+        <Stack.Screen name="Main" component={MainStack} />
+      ) : (
+        <Stack.Screen name="Auth" component={AuthStack} />
+      )}
+    </Stack.Navigator>
+  );
+};
+
+// Main App component
+const App = () => {
+  return (
+    <AuthProvider>
+      <NavigationContainer independent={true}>
+        <RootNavigator />
+      </NavigationContainer>
+    </AuthProvider>
+  );
+};
 
 export default App;
